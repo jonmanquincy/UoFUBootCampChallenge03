@@ -4,7 +4,7 @@ var upperChars = "ABCDEFGHIJKLMOPQRESTUVWXYZ";
 var numericChars = "1234567890";
 var specialChars = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 var length;
-function buildPassword(length, characters) {
+function buildPassword(characters) {
   var result = "";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
@@ -30,7 +30,6 @@ function getLength(){
 }
 
 function generatePassword() {
-  var password = "";
   var characters = "";
 
   //prompt length is between 8 and 128 characters
@@ -50,10 +49,12 @@ function generatePassword() {
   if(special){characters = addCharacters(characters, specialChars);}
 
   //my input should be validated and at least one character type should be selected
-  password = buildPassword(length, characters);
   //a password is generated that matches the selected criteria
-  return password;
-
+  if(characters){return buildPassword(characters);}
+  else{
+    window.alert("At least one character type must be selected");
+    writePassword();
+  }
 }
 
 // Get references to the #generate element
@@ -62,10 +63,12 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  if(password){
   var passwordText = document.querySelector("#password");
 
   //the password is either displayed in an alert or written to the page
-  passwordText.value = password;
+  console.log(password);
+  passwordText.value = password;}
 }
 
 // Add event listener to generate button
