@@ -3,7 +3,7 @@ var lowercaseChars = "abcdefghijklmopqrestuvwxyz";
 var upperChars = "ABCDEFGHIJKLMOPQRESTUVWXYZ";
 var numericChars = "1234567890";
 var specialChars = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-
+var length;
 function buildPassword(length, characters) {
   var result = "";
   var charactersLength = characters.length;
@@ -19,11 +19,22 @@ function addCharacters(characters, charactersToAdd){
   return characters;
 }
 
+function getLength(){
+   var input = window.prompt("How long would you like the password?");
+   if(input <= 128 && input >=8){
+     length = input;
+   }else{
+     window.alert("Length must be a numeric value between 8 and 128");
+     getLength();
+   }
+}
+
 function generatePassword() {
   var password = "";
   var characters = "";
+
   //prompt length is between 8 and 128 characters
-  var length = window.prompt("How long would you like the password?")
+  getLength();
   
   //I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
   var lowercase = confirm("Should your password include: Lower Case Characters?");
